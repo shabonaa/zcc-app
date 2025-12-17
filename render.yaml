@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: zoom-contact-center
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 18.0.0
+      - key: ZOOM_CLIENT_ID
+        sync: false
+      - key: ZOOM_CLIENT_SECRET
+        sync: false
+      - key: ZOOM_APP_REDIRECT_URI
+        sync: false
