@@ -13,68 +13,83 @@
         .tab-active { border-bottom: 2px solid #3b82f6; color: #3b82f6; }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        
+        /* Ensure layout doesn't break on small screens common in Zoom sidebars */
+        @media (max-width: 640px) {
+            .sidebar-labels { display: none; }
+            .main-content { padding: 1rem; }
+        }
     </style>
 </head>
 <body class="bg-[#F8FAFC] min-h-screen flex overflow-hidden">
     <!-- Sidebar -->
-    <aside class="w-16 md:w-20 bg-[#0F172A] flex flex-col items-center py-6 gap-6 flex-shrink-0">
+    <aside class="w-16 md:w-20 bg-[#0F172A] flex flex-col items-center py-6 gap-6 flex-shrink-0 z-20">
         <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-900/20">Z</div>
         <nav class="flex flex-col gap-4 flex-1">
-            <button class="p-3 rounded-xl text-slate-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></button>
-            <button class="p-3 rounded-xl sidebar-item-active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></button>
-            <button class="p-3 rounded-xl text-slate-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></button>
+            <button class="p-3 rounded-xl text-slate-400 hover:text-white transition-colors" title="Dashboard">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </button>
+            <button class="p-3 rounded-xl sidebar-item-active" title="Customers">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </button>
+            <button class="p-3 rounded-xl text-slate-400 hover:text-white transition-colors" title="Analytics">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </button>
         </nav>
-        <button class="p-3 text-slate-400 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></button>
+        <button class="p-3 text-slate-400 hover:text-white" title="Logout">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
     </aside>
 
     <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col overflow-hidden">
+    <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
         <!-- Top Navigation -->
-        <header class="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between flex-shrink-0">
-            <div class="flex items-center gap-3">
-                <span class="text-slate-400 text-sm">Customers</span>
+        <header class="h-16 bg-white border-b border-slate-200 px-4 md:px-6 flex items-center justify-between flex-shrink-0 z-10">
+            <div class="flex items-center gap-2 md:gap-3 overflow-hidden">
+                <span class="text-slate-400 text-xs md:text-sm whitespace-nowrap">Customers</span>
                 <span class="text-slate-300">/</span>
-                <span id="header-name" class="font-semibold text-slate-900">...</span>
+                <span id="header-name" class="font-semibold text-slate-900 truncate">...</span>
             </div>
-            <div class="flex items-center gap-4">
-                <div class="bg-emerald-50 text-emerald-600 text-xs px-3 py-1.5 rounded-full font-bold flex items-center gap-2">
-                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                    ACTIVE ENGAGEMENT
+            <div class="flex items-center gap-2 md:gap-4 flex-shrink-0">
+                <div class="bg-emerald-50 text-emerald-600 text-[10px] md:text-xs px-2 md:px-3 py-1.5 rounded-full font-bold flex items-center gap-1 md:gap-2">
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    <span class="hidden sm:inline">ACTIVE ENGAGEMENT</span>
+                    <span class="sm:hidden">LIVE</span>
                 </div>
                 <button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></button>
             </div>
         </header>
 
         <!-- Content Body -->
-        <div class="flex-1 overflow-y-auto custom-scrollbar p-6">
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6">
             <div id="loading" class="flex flex-col items-center justify-center h-full">
                 <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-4"></div>
-                <p class="text-slate-500 animate-pulse">Synchronizing customer data...</p>
+                <p class="text-slate-500 animate-pulse text-sm">Synchronizing customer data...</p>
             </div>
 
             <div id="customer-content" class="hidden max-w-5xl mx-auto space-y-6">
                 <!-- Customer Header Profile -->
-                <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col md:flex-row items-center md:items-start gap-6">
-                    <div class="relative">
-                        <img id="cust-img" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop" class="w-24 h-24 rounded-2xl object-cover" alt="Profile">
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 md:p-6 flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
+                    <div class="relative flex-shrink-0">
+                        <img id="cust-img" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop" class="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover" alt="Profile" onerror="this.src='https://via.placeholder.com/150?text=Profile'">
                         <div class="absolute -bottom-2 -right-2 bg-white p-1 rounded-lg border border-slate-100 shadow-sm">
-                            <span class="text-xs font-bold text-blue-600 px-1">VIP</span>
+                            <span class="text-[10px] md:text-xs font-bold text-blue-600 px-1">VIP</span>
                         </div>
                     </div>
-                    <div class="flex-1 text-center md:text-left">
-                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
-                            <h2 id="cust-name" class="text-2xl font-bold text-slate-900">...</h2>
-                            <span id="cust-status" class="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-md font-semibold">...</span>
+                    <div class="flex-1 text-center md:text-left min-w-0">
+                        <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-2">
+                            <h2 id="cust-name" class="text-xl md:text-2xl font-bold text-slate-900 truncate">...</h2>
+                            <span id="cust-status" class="inline-block bg-blue-50 text-blue-700 text-[10px] md:text-xs px-2 py-0.5 rounded-md font-semibold self-center md:self-auto">...</span>
                         </div>
-                        <p class="text-slate-500 text-sm mb-4">Customer ID: <span id="cust-id" class="text-slate-900 font-medium">...</span> • Last contact <span id="cust-last" class="text-slate-900 font-medium">...</span></p>
+                        <p class="text-slate-500 text-xs md:text-sm mb-4">ID: <span id="cust-id" class="text-slate-900 font-medium">...</span> • Last contact <span id="cust-last" class="text-slate-900 font-medium">...</span></p>
                         <div class="flex flex-wrap justify-center md:justify-start gap-2">
-                            <div class="flex items-center gap-1.5 bg-slate-50 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-100"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span id="cust-email">...</span></div>
-                            <div class="flex items-center gap-1.5 bg-slate-50 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-100"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <span id="cust-phone">...</span></div>
+                            <div class="flex items-center gap-1.5 bg-slate-50 text-slate-600 px-2 md:px-3 py-1 md:py-1.5 rounded-lg text-[10px] md:text-xs font-medium border border-slate-100 overflow-hidden"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span id="cust-email" class="truncate">...</span></div>
+                            <div class="flex items-center gap-1.5 bg-slate-50 text-slate-600 px-2 md:px-3 py-1 md:py-1.5 rounded-lg text-[10px] md:text-xs font-medium border border-slate-100 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <span id="cust-phone">...</span></div>
                         </div>
                     </div>
-                    <div class="flex md:flex-col gap-2">
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all">New Ticket</button>
-                        <button class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-50 transition-all">Action</button>
+                    <div class="flex md:flex-col gap-2 w-full md:w-auto">
+                        <button class="flex-1 md:flex-none bg-blue-600 text-white px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all">New Ticket</button>
+                        <button class="flex-1 md:flex-none bg-white border border-slate-200 text-slate-700 px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold hover:bg-slate-50 transition-all">Action</button>
                     </div>
                 </div>
 
@@ -82,12 +97,12 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div class="lg:col-span-2 space-y-6">
                         <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
-                            <div class="flex border-b border-slate-100 bg-slate-50/50">
-                                <button class="px-6 py-4 text-sm font-bold tab-active">Timeline</button>
-                                <button class="px-6 py-4 text-sm font-medium text-slate-500 hover:text-slate-700">Orders</button>
-                                <button class="px-6 py-4 text-sm font-medium text-slate-500 hover:text-slate-700">Tickets</button>
+                            <div class="flex border-b border-slate-100 bg-slate-50/50 overflow-x-auto no-scrollbar">
+                                <button class="px-6 py-4 text-sm font-bold tab-active whitespace-nowrap">Timeline</button>
+                                <button class="px-6 py-4 text-sm font-medium text-slate-500 hover:text-slate-700 whitespace-nowrap">Orders</button>
+                                <button class="px-6 py-4 text-sm font-medium text-slate-500 hover:text-slate-700 whitespace-nowrap">Tickets</button>
                             </div>
-                            <div class="p-6">
+                            <div class="p-4 md:p-6">
                                 <div id="history-list" class="space-y-6 relative">
                                     <div class="absolute left-4 top-0 bottom-0 w-px bg-slate-100"></div>
                                     <!-- History items will be injected here -->
@@ -99,20 +114,20 @@
                     <div class="space-y-6">
                         <div class="bg-white rounded-2xl border border-slate-200 p-6">
                             <h3 class="font-bold text-slate-900 mb-4">Agent Notes</h3>
-                            <textarea class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all min-h-[120px]" placeholder="Add a note for this engagement..."></textarea>
+                            <textarea class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all min-h-[120px]" placeholder="Add a note..."></textarea>
                             <button class="w-full mt-3 bg-slate-900 text-white py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 transition-all">Save Note</button>
                         </div>
                         
-                        <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 text-white">
-                            <h3 class="font-bold mb-2">Customer Health</h3>
+                        <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 text-white shadow-xl shadow-blue-900/10">
+                            <h3 class="font-bold mb-2 text-sm md:text-base">Customer Health</h3>
                             <div class="flex items-center gap-4 mb-4">
-                                <div class="text-3xl font-bold">94%</div>
-                                <div class="text-blue-100 text-xs leading-tight">Increased by 4% since last quarter</div>
+                                <div class="text-2xl md:text-3xl font-bold">94%</div>
+                                <div class="text-blue-100 text-[10px] md:text-xs leading-tight">Increased by 4% since last quarter</div>
                             </div>
                             <div class="w-full bg-blue-400/30 rounded-full h-2 mb-4">
                                 <div class="bg-white h-2 rounded-full" style="width: 94%"></div>
                             </div>
-                            <p class="text-xs text-blue-100">Profile is currently up-to-date and all recent tickets are resolved.</p>
+                            <p class="text-[10px] md:text-xs text-blue-100 opacity-90">Profile is currently up-to-date and all recent tickets are resolved.</p>
                         </div>
                     </div>
                 </div>
@@ -121,9 +136,14 @@
     </main>
 
     <script>
+        // Ensure scripts use relative paths or explicit production URLs
+        const API_BASE = window.location.origin;
+
         async function loadProfile() {
             try {
-                const response = await fetch('/api/customer');
+                const response = await fetch(`${API_BASE}/api/customer`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                
                 const data = await response.json();
                 
                 document.getElementById('loading').classList.add('hidden');
@@ -138,6 +158,8 @@
                 document.getElementById('cust-phone').textContent = data.phone;
 
                 const historyList = document.getElementById('history-list');
+                historyList.innerHTML = '<div class="absolute left-4 top-0 bottom-0 w-px bg-slate-100"></div>';
+                
                 data.history.forEach((item, index) => {
                     const div = document.createElement('div');
                     div.className = "flex gap-4 relative z-10";
@@ -145,22 +167,35 @@
                         <div class="w-8 h-8 rounded-full bg-white border-2 ${index === 0 ? 'border-blue-500' : 'border-slate-200'} flex items-center justify-center shrink-0">
                             <div class="w-2 h-2 rounded-full ${index === 0 ? 'bg-blue-500' : 'bg-slate-300'}"></div>
                         </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between mb-1">
-                                <h4 class="text-sm font-bold text-slate-800">${item.type}: ${item.subject}</h4>
-                                <span class="text-[10px] text-slate-400 font-medium">${item.date}</span>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1 gap-2">
+                                <h4 class="text-xs md:text-sm font-bold text-slate-800 truncate">${item.type}: ${item.subject}</h4>
+                                <span class="text-[10px] text-slate-400 font-medium shrink-0">${item.date}</span>
                             </div>
-                            <p class="text-xs text-slate-500 leading-relaxed">Engagement recorded by CRM system. Status set to completed.</p>
+                            <p class="text-[10px] md:text-xs text-slate-500 leading-relaxed">Engagement recorded by CRM system. Status set to completed.</p>
                         </div>
                     `;
                     historyList.appendChild(div);
                 });
             } catch (err) {
                 console.error("Failed to load CRM data", err);
+                // Show user friendly error on screen if fetch fails
+                document.getElementById('loading').innerHTML = `
+                    <div class="text-center p-6 bg-red-50 rounded-xl border border-red-100">
+                        <p class="text-red-600 font-bold mb-2">Sync Error</p>
+                        <p class="text-red-500 text-xs">Could not connect to the CRM backend. Please check your Render logs.</p>
+                        <button onclick="location.reload()" class="mt-4 text-xs font-bold text-white bg-red-600 px-4 py-2 rounded-lg">Retry</button>
+                    </div>
+                `;
             }
         }
 
         window.onload = loadProfile;
+
+        // Prevent Zoom client issues by handling messages
+        window.addEventListener('message', (event) => {
+            // Future Zoom SDK messaging handling
+        });
     </script>
 </body>
 </html>
